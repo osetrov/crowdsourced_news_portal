@@ -1,0 +1,9 @@
+ru:
+  activerecord:
+    attributes:
+      user:
+        email: 'Электропочта'
+        password: 'Пароль'
+        remember_me: 'Запомнить меня'
+        password_confirmation: 'Подтверждение пароля'
+        name: 'Ваше имя'
