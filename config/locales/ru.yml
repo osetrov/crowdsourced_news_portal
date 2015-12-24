@@ -7,3 +7,8 @@ ru:
         remember_me: 'Запомнить меня'
         password_confirmation: 'Подтверждение пароля'
         name: 'Ваше имя'
+      article:
+        title: 'Заголовок'
+        description: 'Описание'
+        content: 'Содержание'
+        categories: 'Категории'

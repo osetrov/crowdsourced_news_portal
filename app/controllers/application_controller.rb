@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
+  def require_authorization
+    redirect_to new_user_session_path
+  end
+
   protected
 
   def configure_devise_permitted_parameters
@@ -19,5 +23,10 @@ class ApplicationController < ActionController::Base
           |u| u.permit(registration_params)
       }
     end
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = exception.message
+    redirect_to new_user_session_path, :alert => exception.message
   end
 end

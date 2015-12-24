@@ -14,4 +14,10 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
+//= require redactor-rails/redactor.min.js
+//= require redactor-rails/ru.js
+//= require redactor-rails/fullscreen.js
+//= require redactor-rails/video.js
+//= require redactor-rails/config.js
 //= require_tree .
+

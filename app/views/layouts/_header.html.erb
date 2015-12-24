@@ -1,6 +1,10 @@
 <header class="header">
   <div class="row">
-    <div class="col-md-7"></div>
+    <div class="col-md-7">
+      <% if user_signed_in? and controller_name != 'articles' and action_name != 'new' %>
+        <%= link_to 'Написать новую статью', new_article_path %>
+      <% end %>
+    </div>
     <div class="col-md-5">
       <%= render 'devise/shared/links' %>
     </div>

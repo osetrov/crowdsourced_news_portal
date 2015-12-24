@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= article.title %>
+      <span class="right"><%= article.user.name.present? ?  article.user.name : article.user.email %> |
+       <%= I18n.l article.created_at, :format => :short%></span>
+    </h3>
+  </div>
+  <div class="panel-body">
+    <%= link_to (article.description.present? ? article.description : 'Подробнее'), article %>
+  </div>
+  <div class="panel-footer">
+    <% if Category.includes(:articles).where(articles: {id: article.id}).size > 0 %>
+        Категории:
+        <% Category.includes(:articles).where(articles: {id: article.id}).each do |category| %>
+            <%= link_to category.title, root_path(:category => category.id) %>
+        <% end %>
+    <% end %>
+    <% if can? :manage, article%>
+        <span class="right">
+            <%= link_to "Изменить", edit_article_path(article) %>
+            <%= link_to "Удалить", article, :method => :delete, :data => { :confirm => 'Вы уверены?' } %>
+        </span>
+    <% end %>
+  </div>
+</div>

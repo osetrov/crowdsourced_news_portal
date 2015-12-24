@@ -48,3 +48,17 @@ end
 gem "twitter-bootstrap-rails"
 
 gem 'devise'
+gem 'cancancan'
+
+gem 'simple_form'
+
+gem 'redactor-rails'
+gem "carrierwave"
+gem "mini_magick"
+
+gem 'validates_email_format_of'
+
+gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
+
+gem 'russian'
