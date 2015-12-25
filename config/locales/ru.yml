@@ -12,3 +12,7 @@ ru:
         description: 'Описание'
         content: 'Содержание'
         categories: 'Категории'
+  helpers:
+      submit:
+        comment:
+          create: "Отправить комментарий"

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-10">
+<% if comment.id.present? %>
+    <div class="media comment-id-<%=comment.id%>">
+      <div class="media-body">
+        <h4 class="media-heading"><%= comment.name %></h4> <span class="right"><%= I18n.l comment.created_at, :format => :short%></span>
+
+        <%= raw comment.content %>
+
+        <div class="clear"></div>
+
+        <span class="small"> <a href="javascript: return void(0)" onclick="reply_comment(<%=comment.id%>)">Ответить</a>
+          <% if can? :manage, comment and comment.comments.size == 0 %>
+              <%= link_to "Удалить", comment, :method => :delete, :data => { :confirm => 'Вы уверены?' } %>
+          <% end %>
+        </span>
+
+
+        <div class="hidden reply-comment reply-comment-<%=comment.id%>">
+          <%= render 'comments/form', :comment_object => comment.comments.new,
+                     :article => nil, :comment => comment %>
+        </div>
+        <hr>
+        <div class="comments_<%= comment.id %>">
+            <%= render comment.comments %>
+        </div>
+      </div>
+    </div>
+<% end %>
+      </div>
+    </div>

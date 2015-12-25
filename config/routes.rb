@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   mount RedactorRails::Engine => '/redactor_rails'
 
   resources :articles

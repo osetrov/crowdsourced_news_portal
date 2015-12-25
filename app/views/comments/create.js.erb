@@ -1,0 +1,5 @@
+<% if @comment.article.present? %>
+    $('.comments_0').prepend('<%= escape_javascript render @comment %>');
+<% elsif @comment.comment.present? %>
+    $('.comments_<%= @comment.comment.id %>').prepend('<%= escape_javascript render @comment %>');
+<% end %>

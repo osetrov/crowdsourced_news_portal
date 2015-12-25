@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :articles
+  has_many :articles, dependent: :destroy
   has_and_belongs_to_many :roles
+  has_many :comments, dependent: :destroy
 
   validates :name, presence: true
   validates :email, email_format: { message: "Не выглядит как электронный адресс" }

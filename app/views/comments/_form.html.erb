@@ -1,0 +1,21 @@
+<%= simple_form_for comment_object, :remote => true do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-group">
+    <%= f.text_field :name, :value => ((current_user.present? and current_user.name.present?) ? current_user.name : ''),
+                     :class => 'form-control', :placeholder => 'Ваше имя' %>
+    <%= f.hidden_field :article_id, :value => (article.present? ? article.id : nil) %>
+    <%= f.hidden_field :comment_id, :value => (comment.present? ? comment.id : nil) %>
+  </div>
+    <div class="form-group">
+    <%= f.text_area :content,
+                    :class => 'form-control', :rows => 4, :cols => 50,
+                    :placeholder => 'Текст комментария'
+    %>
+    </div>
+
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

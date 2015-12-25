@@ -10,17 +10,21 @@
     <%= link_to (article.description.present? ? article.description : 'Подробнее'), article %>
   </div>
   <div class="panel-footer">
-    <% if Category.includes(:articles).where(articles: {id: article.id}).size > 0 %>
-        Категории:
-        <% Category.includes(:articles).where(articles: {id: article.id}).each do |category| %>
-            <%= link_to category.title, root_path(:category => category.id) %>
+    <div class="row">
+      <div class="col-md-12">
+        <% if Category.includes(:articles).where(articles: {id: article.id}).size > 0 %>
+            Категории:
+            <% Category.includes(:articles).where(articles: {id: article.id}).each do |category| %>
+                <%= link_to category.title, root_path(:category => category.id) %>
+            <% end %>
         <% end %>
-    <% end %>
-    <% if can? :manage, article%>
-        <span class="right">
-            <%= link_to "Изменить", edit_article_path(article) %>
-            <%= link_to "Удалить", article, :method => :delete, :data => { :confirm => 'Вы уверены?' } %>
-        </span>
-    <% end %>
+        <% if can? :manage, article %>
+            <span class="right">
+                <%= link_to "Изменить", edit_article_path(article) %>
+                <%= link_to "Удалить", article, :method => :delete, :data => { :confirm => 'Вы уверены?' } %>
+            </span>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

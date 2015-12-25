@@ -1,29 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+<h1><%= @article.title %></h1>
 
 <p>
-  <strong>Description:</strong>
   <%= @article.description %>
 </p>
 
 <p>
-  <strong>Content:</strong>
-  <%= @article.content %>
+  <%= raw @article.content %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @article.user %>
+  <strong>Автор:</strong>
+  <%= @article.user.name.present? ? @article.user.name : @article.user.email %>
 </p>
-
 <p>
-  <strong>Moderated:</strong>
-  <%= @article.moderated %>
+<span><%= I18n.l @article.created_at, :format => :short%></span>
 </p>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+<div class="row">
+  <a href="javascript: return void(0)" onclick="reply_comment(0)">Ответить</a>
+  <div class="col-md-12 reply-comment reply-comment-0 hidden">
+    <%= render 'comments/form', :comment_object => @article.comments.new,
+               :article => @article, :comment => nil %>
+  </div>
+</div>
+<% if @article.comments.size > 0 %>
+<hr>
+<div class="row">
+  <div class="col-md-12 comments_0">
+<%= render @article.comments %>
+  </div>
+</div>
+<% end %>
+<hr>
+
+<% if can? :manage, @article %>
+<%= link_to 'Редактировать', edit_article_path(@article) %> |
+<% end %>
+<%= link_to 'Назад', root_path %>
