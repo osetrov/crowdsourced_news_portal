@@ -27,11 +27,27 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-
     @article.user = current_user
 
     respond_to do |format|
       if @article.save
+
+        if params[:article][:category_ids].present?
+          params[:article][:category_ids].each do |article_id|
+            if article_id.to_i > 0
+              @article.categories << Category.find(article_id.to_f)
+            end
+          end
+        end
+        if @article.save
+          @article.categories.each do |category|
+            ActiveRecord::Base.transaction do
+              category.users.each do |user|
+                UserNotifier.report(user, @article).deliver
+              end
+            end
+          end
+        end
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else

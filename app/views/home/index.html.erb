@@ -4,7 +4,19 @@
       <% Category.all.each do |item| %>
         <li role="presentation"
             <% if item.id == params[:category].to_i %> class="active" <% end %>
-        ><%= link_to item.title, root_path(:category => item.id) %></li>
+        ><%= link_to item.title, root_path(:category => item.id) %>
+        </li>
+          <% if user_signed_in? %>
+              <% if current_user.categories.include? item %>
+                  <%= link_to 'Отписаться', subscription_category_path(:id => item, :user_id => current_user.id),
+                              :remote => true,
+                              :class => "subscription subscription_" + item.id.to_s + ((item.id == params[:category].to_i) ? ' active' : '') %>
+              <% else %>
+                  <%= link_to 'Подписаться', subscription_category_path(:id => item, :user_id => current_user.id),
+                              :remote => true,
+                              :class => "subscription subscription_" + item.id.to_s + ((item.id == params[:category].to_i) ? ' active' : '') %>
+              <% end %>
+          <% end %>
       <% end %>
     </ul>
   </div>

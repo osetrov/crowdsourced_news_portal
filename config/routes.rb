@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :category do
+    get 'subscription', :on => :member
+  end
+
   root 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

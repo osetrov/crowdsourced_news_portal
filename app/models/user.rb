@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :articles, dependent: :destroy
   has_and_belongs_to_many :roles
   has_many :comments, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
+  has_many :categories, :through => :subscriptions
 
   validates :name, presence: true
   validates :email, email_format: { message: "Не выглядит как электронный адресс" }

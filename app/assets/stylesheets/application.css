@@ -18,3 +18,14 @@
 .right {
     float: right;
 }
+
+.subscription {
+    display: block;
+    margin-left: 130px;
+    margin-top: -28px;
+    position: relative;
+}
+
+.subscription.active {
+    color: #fff;
+}

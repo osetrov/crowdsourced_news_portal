@@ -1,0 +1,5 @@
+<% if current_user.categories.include? @category %>
+    $('.subscription_<%= @category.id %>').html('Отписаться');
+<% else %>
+    $('.subscription_<%= @category.id %>').html('Подписаться');
+<% end %>

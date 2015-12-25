@@ -62,3 +62,5 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
 
 gem 'russian'
+
+gem 'delayed_job_active_record'
